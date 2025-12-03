@@ -6,14 +6,15 @@
 - 24T3 Q8
 - 21T3 Q6
 #### 字符串/数组处理：
-- 模拟考试 Q3
-- 24T3pre Q123
-- 24T3 Q13
-- 23T3 Q13
+- 模拟考试 Q3✅
+- 24T3pre Q1✅ Q2✅ Q3
+- 24T3 Q1✅ Q3✅
+- 23T3 Q1 Q3
 - 22T2 Q1
 - 22T1 Q1
 #### 图形打印：
 - 22T2 Q3
+- 22T1 Q3
 ## 数据结构
 ```py
 # 双指针
@@ -57,12 +58,18 @@ list(zip([1, 2], ['a', 'b', 'c']))  # 一一配对，允许长度不同
 
 from collections import defaultdict, Counter
 
-from random import seed, randint, randrange
-
-
+# A,B...循环 next(letters)：返回str
 from itertools import cycle
 import string
-letters = cycle(string.ascii_uppercase)  # A,B...循环 next(letters) 返回str
+letters = cycle(string.ascii_uppercase)
+for i in range(total):  # 动态提取字母
+    myLetters += next(letters)
+
+# 竖着打印数组
+from itertools import zip_longest
+cols = [' * ', '***']
+for l in zip_longest(*cols):
+    print(' '.join(l).rstrip())
 ```
 ## 模版：字符串、数组处理
 重复某数字，个数是该数的下一个数，最后一个用第一个数
@@ -119,13 +126,6 @@ if a < 0:
     a = a[1:]  # 数字：a = a * -1
 return -a if is_negative else a
 ```
-#### 数组竖着打印
-```py
-from itertools import zip_longest
-cols = [' * ', '***']
-for l in zip_longest(*cols):
-    print(' '.join(l).strip())
-```
 一串数，从大到小输出其中的单个奇数
 ```py
 res = ''
@@ -167,12 +167,21 @@ for i in range(len(s)):
 a = int(s, 2)  # 二进制数字串转十进制
 a = bin(b)[2:]  # 十进制数字转二进制
 ```
+输入n，输出n个数，每一个是前一个数加上该数的下标
+```py
+res = []
+cnt = 1
+for i in range(n):
+    cnt += i
+return tuple(res), tuple(res[::-1])
+```
 ## 模版：文件处理
 基础
 ```py
 with open(filename) as f:
+    lines = []
     for line in f:
-        pass
+        lines.append(line.strip())  # 读取所有行，存到数组里
 ```
 ## 库
 ```py
